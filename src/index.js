@@ -16,4 +16,32 @@ class Ship {
   }
 }
 
-export { Ship };
+class Gameboard {
+  constructor(gameboardData, shipClass) {
+    this.grid = {};
+    this.shipClass = shipClass;
+  }
+
+  receiveAttack(coordinates) {}
+
+  //  get ships() {
+  //    return
+  //  }
+
+  #placeShip(coordinates, length) {
+    const ship = new this.shipClass(length);
+    coordinates.forEach((coordinate) => {
+      this.grid[coordinate] = ship;
+    });
+  }
+
+  initializeGameboard(ships) {
+    ships.forEach((ship) => {
+      this.#placeShip(ship[0], ship[1]);
+    });
+  }
+}
+
+export { Ship, Gameboard };
+
+console.log(Object.entries({ asd1: 2, g45g4g: 5 }));
