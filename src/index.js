@@ -17,31 +17,40 @@ class Ship {
 }
 
 class Gameboard {
-  constructor(gameboardData, shipClass) {
-    this.grid = {};
-    this.shipClass = shipClass;
+  constructor(gameboardData) {
+    this.grid = this.#initializeGameboard(gameboardData);
   }
 
   receiveAttack(coordinates) {}
 
-  //  get ships() {
-  //    return
-  //  }
-
-  #placeShip(coordinates, length) {
-    const ship = new this.shipClass(length);
+  #placeShip(ship, gameboard) {
+    const coordinates = ship[0];
+    const length = ship[1];
+    const newShip = new Ship(length);
     coordinates.forEach((coordinate) => {
-      this.grid[coordinate] = ship;
+      gameboard[this.#getCell(coordinate)].ship = newShip;
     });
   }
 
-  initializeGameboard(ships) {
+  #initializeGameboard(ships) {
+    const gridArr = new Array(10 * 10).fill(null).map(() => ({
+      ship: undefined,
+      cellIsHit: false,
+    }));
     ships.forEach((ship) => {
-      this.#placeShip(ship[0], ship[1]);
+      this.#placeShip(ship, gridArr);
     });
+
+    return gridArr;
+  }
+
+  #getCell(coordinate) {
+    const x = Number(coordinate[0]);
+    const y = Number(coordinate[2]);
+    return y * 10 + x;
   }
 }
 
-export { Ship, Gameboard };
+console.log(new Gameboard([[["2,3"], 1]]));
 
-console.log(Object.entries({ asd1: 2, g45g4g: 5 }));
+export { Ship, Gameboard };

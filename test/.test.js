@@ -23,12 +23,10 @@ describe("Ship", () => {
 });
 
 describe("Gameboard", () => {
-  beforeEach(() => {
-    gameboard = new Gameboard();
-  });
+  gameboard = new Gameboard([[["2,3"], 1]]);
 
   test("Recieve attack", () => {
-    gameboard.receiveAttack("e2");
-    expect(gameboard["e2"]).toEqual("hit");
+    gameboard.receiveAttack("2,3");
+    expect(gameboard[32].cellIsHit).toEqual(true);
   });
 });
