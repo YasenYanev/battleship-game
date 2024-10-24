@@ -26,7 +26,6 @@ describe("Gameboard", () => {
   gameboard = new Gameboard([[["2,3"], 1]]);
 
   test("Recieve attack", () => {
-    gameboard.receiveAttack("2,3");
-    expect(gameboard[32].cellIsHit).toEqual(true);
+    expect(gameboard.receiveAttack("2,3")).toEqual("hit");
   });
 });

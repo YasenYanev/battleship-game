@@ -45,12 +45,9 @@ class Gameboard {
   }
 
   #getCell(coordinate) {
-    const x = Number(coordinate[0]);
-    const y = Number(coordinate[2]);
+    const [x, y] = coordinate.split(",").map((num) => Number(num));
     return y * 10 + x;
   }
 }
-
-console.log(new Gameboard([[["2,3"], 1]]));
 
 export { Ship, Gameboard };
